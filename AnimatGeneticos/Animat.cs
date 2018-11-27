@@ -6,5 +6,6 @@ using System.Threading.Tasks;
 
 namespace AnimatGeneticos {
     class Animat {
+        int n, m;
     }
 }
