@@ -6,48 +6,21 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace AnimatGeneticos{
-    class Tablero {
-        enum valorCasilla { bloque, izquierda, derecha, arriba, abajo, bomba, animat};
-        static List<valorCasilla>[,] tablero;
-        static int N, M;
+    public class Tablero {
+        public enum valorCasilla { bloque, izquierda, derecha, arriba, abajo, bomba, animat};
+        public List<valorCasilla>[,] tablero;
+        public int N, M;
+        public long cambiosDeEstado;
 
-        static void Main(String[] args) {
-            //N = int.Parse(args[0]);
-            //M = int.Parse(args[1]);
-            N = 7;
-            M = 7;
-            PoblateTablero();
-            //for (int i = 0; i < N; i++) {
-            //    Console.WriteLine("--------------CAMBIO DE FILA: " + i + "-----------------");
-            //    for (int j = 0; j < M; j++) {
-            //        Console.WriteLine("--------------CAMBIO DE COLUMNA: " + j + "-----------------");
-            //        foreach (valorCasilla valor in tablero[i, j]) {
-            //            Console.WriteLine(valor);
-            //        }
-            //    }
-            //}
-
-            tablero[3, 6].Add(valorCasilla.animat);
-            tablero[1, 2].Add(valorCasilla.animat);
-            tablero[6, 2].Add(valorCasilla.animat);
-            Console.WriteLine(ImprimeTablero());
-
-            while (true)
-            {
-                ActualizaTablero();
-                Console.WriteLine(ImprimeTablero());
-                Thread.Sleep(500);
-                if (Resuelto())
-                {
-                    Console.WriteLine("Resuelto");
-                    break;
-                }
-
-            }
-            Console.Read();
+        public Tablero(int N,int M, int noAnimats)
+        {
+            this.N = N;
+            this.M = M;
+            this.cambiosDeEstado = 0;
+            PoblateTablero(noAnimats);
         }
 
-        static bool Resuelto()
+        public bool Resuelto()
         {
             int i, j;
             for (i = 0; i < N; i++)
@@ -60,7 +33,7 @@ namespace AnimatGeneticos{
             return true;
         }
 
-        static void ActualizaTablero()
+        public void ActualizaTablero()
         {
             var tableroActualizado = new List<valorCasilla>[N,M];
             int i, j;
@@ -204,10 +177,11 @@ namespace AnimatGeneticos{
                         }
                     }
                 }
+            cambiosDeEstado++;
             tablero = tableroActualizado;
         }
 
-        static string ImprimeTablero()
+        public string ImprimeTablero()
         {
             string ans = "";
             int i, j;
@@ -264,7 +238,7 @@ namespace AnimatGeneticos{
 
         }
 
-        static bool Biyeccion(int i, int j)
+        public bool Biyeccion(int i, int j)
         {
             return (tablero[i, j].Contains(valorCasilla.abajo) && tablero[i, j].Contains(valorCasilla.izquierda)) ||
                  (tablero[i, j].Contains(valorCasilla.abajo) && tablero[i, j].Contains(valorCasilla.derecha)) ||
@@ -272,11 +246,11 @@ namespace AnimatGeneticos{
                  (tablero[i, j].Contains(valorCasilla.arriba) && tablero[i, j].Contains(valorCasilla.derecha));
         }
 
-        static void PoblateTablero()
+        public void PoblateTablero(int noAnimats)
         {
             tablero = new List<valorCasilla>[N,M];
             Random generadorRandom = new Random();
-            int contadorBombas = 0;
+            int contadorBombas = 0, contadorAnimats = 0;
             for(int i = 0; i < N; i++) {
                 for(int j = 0; j < M; j++) {
                     tablero[i, j] = new List<valorCasilla>();
@@ -317,13 +291,27 @@ namespace AnimatGeneticos{
                     }
                 }
             }
+            int x, y;
             //Bombas      
             while (contadorBombas < N * M * 0.3) { 
-                int x = generadorRandom.Next(0, N);
-                int y = generadorRandom.Next(0, M);
+                x = generadorRandom.Next(0, N);
+                y = generadorRandom.Next(0, M);
                 if (!tablero[x, y].Contains(valorCasilla.bloque) && !tablero[x,y].Contains(valorCasilla.bomba)) {
                     tablero[x, y].Add(valorCasilla.bomba);
                     contadorBombas++;
+                }
+            }
+
+            //Animats
+            while(contadorAnimats < noAnimats)
+            {
+                x = generadorRandom.Next(0, N);
+                y = generadorRandom.Next(0, M);
+                if (!tablero[x, y].Contains(valorCasilla.bloque) && !tablero[x, y].Contains(valorCasilla.bomba)
+                    && !tablero[x, y].Contains(valorCasilla.animat))
+                {
+                    tablero[x, y].Add(valorCasilla.animat);
+                    contadorAnimats++;
                 }
             }
         }
