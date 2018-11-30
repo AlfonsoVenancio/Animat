@@ -57,7 +57,6 @@
             this.label1.Size = new System.Drawing.Size(260, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Por favor especifica los parametros.";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -68,7 +67,6 @@
             this.label2.Size = new System.Drawing.Size(18, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "N";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -96,6 +94,7 @@
             this.ATextBox.Name = "ATextBox";
             this.ATextBox.Size = new System.Drawing.Size(67, 20);
             this.ATextBox.TabIndex = 5;
+            this.ATextBox.Text = "3";
             // 
             // MTextBox
             // 
@@ -103,7 +102,7 @@
             this.MTextBox.Name = "MTextBox";
             this.MTextBox.Size = new System.Drawing.Size(67, 20);
             this.MTextBox.TabIndex = 6;
-            this.MTextBox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.MTextBox.Text = "7";
             // 
             // NTextBox
             // 
@@ -111,6 +110,7 @@
             this.NTextBox.Name = "NTextBox";
             this.NTextBox.Size = new System.Drawing.Size(67, 20);
             this.NTextBox.TabIndex = 7;
+            this.NTextBox.Text = "7";
             // 
             // Config
             // 

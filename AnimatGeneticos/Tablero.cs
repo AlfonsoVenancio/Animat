@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace AnimatGeneticos{
+namespace AnimatGeneticos
+{
     public class Tablero {
         public enum valorCasilla { bloque, izquierda, derecha, arriba, abajo, bomba, animat};
         public List<valorCasilla>[,] tablero;
@@ -85,6 +82,36 @@ namespace AnimatGeneticos{
                             double p = r.NextDouble();
                             if(actual.Contains(valorCasilla.abajo) && actual.Contains(valorCasilla.derecha))
                             {
+                                //Busca Derecha
+                                if (tablero[i, j + 1].Contains(valorCasilla.bomba) && !tablero[i, j + 1].Contains(valorCasilla.animat)) {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i, j + 1].Add(valorCasilla.animat);
+                                    tableroActualizado[i, j + 1].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Abajo
+                                if (tablero[i + 1, j].Contains(valorCasilla.bomba) && !tablero[i + 1, j].Contains(valorCasilla.animat)) {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i + 1, j].Add(valorCasilla.animat);
+                                    tableroActualizado[i + 1, j].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Derecha
+                                if (tablero[i, j + 2].Contains(valorCasilla.bomba) && !tablero[i, j + 1].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i, j + 1].Add(valorCasilla.animat);
+                                    tableroActualizado[i, j + 1].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Abajo
+                                if (tablero[i + 2, j].Contains(valorCasilla.bomba) && !tablero[i + 1, j].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i + 1, j].Add(valorCasilla.animat);
+                                    tableroActualizado[i + 1, j].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
                                 if (p < .5)
                                 {
                                     //abajo
@@ -107,6 +134,38 @@ namespace AnimatGeneticos{
                             }
                             if (actual.Contains(valorCasilla.abajo) && actual.Contains(valorCasilla.izquierda))
                             {
+                                //Busca Abajo
+                                if (tablero[i + 1, j].Contains(valorCasilla.bomba) && !tablero[i + 1, j].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i + 1, j].Add(valorCasilla.animat);
+                                    tableroActualizado[i + 1, j].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Izquierda
+                                if (tablero[i, j - 1].Contains(valorCasilla.bomba) && !tablero[i, j - 1].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i, j - 1].Add(valorCasilla.animat);
+                                    tableroActualizado[i, j - 1].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Abajo
+                                if (tablero[i + 2, j].Contains(valorCasilla.bomba) && !tablero[i + 1, j].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i + 1, j].Add(valorCasilla.animat);
+                                    tableroActualizado[i + 1, j].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Izquierda
+                                if (tablero[i, j - 2].Contains(valorCasilla.bomba) && !tablero[i, j - 1].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i, j - 1].Add(valorCasilla.animat);
+                                    tableroActualizado[i, j - 1].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
                                 if (p < .5)
                                 {
                                     //abajo
@@ -130,6 +189,39 @@ namespace AnimatGeneticos{
                             }
                             if (actual.Contains(valorCasilla.arriba) && actual.Contains(valorCasilla.derecha))
                             {
+                                //Busca Derecha
+                                if (tablero[i, j + 1].Contains(valorCasilla.bomba) && !tablero[i, j + 1].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i, j + 1].Add(valorCasilla.animat);
+                                    tableroActualizado[i, j + 1].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Arriba
+                                if (tablero[i-1,j].Contains(valorCasilla.bomba) && !tablero[i - 1, j].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i - 1, j].Add(valorCasilla.animat);
+                                    tableroActualizado[i - 1, j].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Derecha
+                                if (tablero[i, j + 2].Contains(valorCasilla.bomba) && !tablero[i, j + 1].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i, j + 1].Add(valorCasilla.animat);
+                                    tableroActualizado[i, j + 1].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Arriba
+                                if (tablero[i - 2, j].Contains(valorCasilla.bomba) && !tablero[i - 1, j].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i - 1, j].Add(valorCasilla.animat);
+                                    tableroActualizado[i - 1, j].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+
                                 if (p < .5)
                                 {
                                     //arriba
@@ -153,6 +245,37 @@ namespace AnimatGeneticos{
                             }
                             if (actual.Contains(valorCasilla.arriba) && actual.Contains(valorCasilla.izquierda))
                             {
+                                //Busca Arriba
+                                if (tablero[i - 1, j].Contains(valorCasilla.bomba) && !tablero[i - 1, j].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i - 1, j].Add(valorCasilla.animat);
+                                    tableroActualizado[i - 1, j].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Izquierda
+                                if (tablero[i, j - 1].Contains(valorCasilla.bomba) && !tablero[i, j - 1].Contains(valorCasilla.animat)) {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i, j - 1].Add(valorCasilla.animat);
+                                    tableroActualizado[i, j - 1].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Arriba
+                                if (tablero[i - 2, j].Contains(valorCasilla.bomba) && !tablero[i - 1, j].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i - 1, j].Add(valorCasilla.animat);
+                                    tableroActualizado[i - 1, j].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
+                                //Busca Izquierda
+                                if (tablero[i, j - 2].Contains(valorCasilla.bomba) && !tablero[i, j - 1].Contains(valorCasilla.animat))
+                                {
+                                    tableroActualizado[i, j].Remove(valorCasilla.animat);
+                                    tableroActualizado[i, j - 1].Add(valorCasilla.animat);
+                                    tableroActualizado[i, j - 1].Remove(valorCasilla.bomba);
+                                    continue;
+                                }
                                 if (p < .5)
                                 {
                                     //arriba
@@ -189,7 +312,6 @@ namespace AnimatGeneticos{
             {
                 for (j = 0; j < M; j++)
                 {
-                    //En caso de que sea un animat se actualizara la posición
                     if (tablero[i, j].Contains(valorCasilla.animat))
                     {
                         ans+='A';
@@ -301,7 +423,6 @@ namespace AnimatGeneticos{
                     contadorBombas++;
                 }
             }
-
             //Animats
             while(contadorAnimats < noAnimats)
             {
@@ -317,3 +438,4 @@ namespace AnimatGeneticos{
         }
     }
 }
+
