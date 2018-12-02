@@ -25,7 +25,7 @@ namespace AnimatGeneticos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Asegurate de ingresar caracteres numericos.");
+                MessageBox.Show("Asegurate de ingresar caracteres numericos. "+ex);
                 NTextBox.Text = "";
                 MTextBox.Text = "";
                 ATextBox.Text = "";

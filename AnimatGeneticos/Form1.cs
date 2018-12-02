@@ -49,17 +49,17 @@ namespace AnimatGeneticos
                     
                     if (mapa.tablero[i, j].Contains(Tablero.valorCasilla.animat))
                     {
-                        pictures[i, j].Image = Image.FromFile("animat.png");
+                        pictures[i, j].Image = Properties.Resources.animat;
                         continue;
                     }
                     if (mapa.tablero[i, j].Contains(Tablero.valorCasilla.bomba))
                     {
-                        pictures[i, j].Image = Image.FromFile("bomba.png");
+                        pictures[i, j].Image = Properties.Resources.bomba;
                         continue;
                     }
                     if (mapa.tablero[i, j].Contains(Tablero.valorCasilla.bloque))
                     {
-                        pictures[i, j].Image = Image.FromFile("block.png");
+                        pictures[i, j].Image = Properties.Resources.block;
                         continue;
                     }
                     pictures[i, j].Image = null;
