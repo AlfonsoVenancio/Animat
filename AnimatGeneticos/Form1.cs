@@ -14,6 +14,7 @@ namespace AnimatGeneticos
        
         public Form1(int N, int M, int A)
         {
+            this.Icon = Properties.Resources.animat1;
             this.N = N;
             this.M = M;
             //Max 15*27

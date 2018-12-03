@@ -8,6 +8,7 @@ namespace AnimatGeneticos
         public Config()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.animat1;
         }
 
         private void startBtn_Click(object sender, EventArgs e)
