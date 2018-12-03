@@ -8,6 +8,7 @@ namespace AnimatGeneticos
         public Config()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.animat1;
         }
 
         private void startBtn_Click(object sender, EventArgs e)
@@ -18,6 +19,18 @@ namespace AnimatGeneticos
                 N = Int32.Parse(NTextBox.Text);
                 M = Int32.Parse(MTextBox.Text);
                 A = Int32.Parse(ATextBox.Text);
+
+                if (N % 2 == 0 || M % 2 == 0)
+                {
+                    NTextBox.Text = "";
+                    MTextBox.Text = "";
+                    MessageBox.Show("Las longitudes del tablero deben ser impares");
+                    return;
+                }
+                if (((N + 1) / 2) % 2 != 0 || ((M + 1) / 2) % 2 != 0)
+                {
+                    MessageBox.Show("Se pueden presentar estados absorbentes e inalcanzables");
+                }
                 Form1 f = new Form1(N, M, A);
                 this.Hide();
                 f.ShowDialog();
@@ -25,7 +38,7 @@ namespace AnimatGeneticos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Asegurate de ingresar caracteres numericos.");
+                MessageBox.Show("Asegurate de ingresar caracteres numericos. ");
                 NTextBox.Text = "";
                 MTextBox.Text = "";
                 ATextBox.Text = "";
