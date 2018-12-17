@@ -41,9 +41,32 @@ namespace AnimatGeneticos
                     tableroActualizado[i, j] = new List<valorCasilla>(tablero[i, j]);
 
             for (i = 0; i < N; i++)
-                for(j=0; j<M; j++)
+                for (j = 0; j < M; j++)
                 {
                     var actual = tablero[i, j];
+
+                    //Parche para evitar estados absorbentes
+                    if (IsAbsorbentTypeI() && i == N - 1 && j == M - 1 && tablero[i,j].Contains(valorCasilla.animat) && !tablero[N - 1, 0].Contains(valorCasilla.animat))
+                    {
+                        tableroActualizado[i, j].Remove(valorCasilla.animat);
+                        tableroActualizado[N - 1, 0].Add(valorCasilla.animat);
+                        tableroActualizado[N - 1, 0].Remove(valorCasilla.bomba);
+                    }
+
+                    if (IsAbsorbentTypeII() && i == 0 && j == M - 1 && tablero[i, j].Contains(valorCasilla.animat) && !tablero[N - 1, M-1].Contains(valorCasilla.animat))
+                    {
+                        tableroActualizado[i, j].Remove(valorCasilla.animat);
+                        tableroActualizado[N - 1, M - 1].Add(valorCasilla.animat);
+                        tableroActualizado[N - 1, M - 1].Remove(valorCasilla.bomba);
+                    }
+
+                    if (IsAbsorbentTypeIII() && i == 0 && j == M - 1 && tablero[i, j].Contains(valorCasilla.animat) && !tablero[N - 1, 0].Contains(valorCasilla.animat))
+                    {
+                        tableroActualizado[i, j].Remove(valorCasilla.animat);
+                        tableroActualizado[N - 1, 0].Add(valorCasilla.animat);
+                        tableroActualizado[N - 1, 0].Remove(valorCasilla.bomba);
+                    }
+
                     //En caso de que sea un animat se actualizara la posición
                     if (actual.Contains(valorCasilla.animat))
                     {
@@ -302,6 +325,21 @@ namespace AnimatGeneticos
                 }
             cambiosDeEstado++;
             tablero = tableroActualizado;
+        }
+
+        public bool IsAbsorbentTypeI()
+        {
+            return ((N + 1) / 2) % 2 != 0 && ((M + 1) / 2) % 2 == 0;
+        }
+
+        public bool IsAbsorbentTypeII()
+        {
+            return ((N + 1) / 2) % 2 == 0 && ((M + 1) / 2) % 2 != 0;
+        }
+
+        public bool IsAbsorbentTypeIII()
+        {
+            return ((N + 1) / 2) % 2 != 0 && ((M + 1) / 2) % 2 != 0;
         }
 
         public string ImprimeTablero()

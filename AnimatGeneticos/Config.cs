@@ -27,10 +27,6 @@ namespace AnimatGeneticos
                     MessageBox.Show("Las longitudes del tablero deben ser impares");
                     return;
                 }
-                if (((N + 1) / 2) % 2 != 0 || ((M + 1) / 2) % 2 != 0)
-                {
-                    MessageBox.Show("Se pueden presentar estados absorbentes e inalcanzables");
-                }
                 Form1 f = new Form1(N, M, A);
                 this.Hide();
                 f.ShowDialog();
